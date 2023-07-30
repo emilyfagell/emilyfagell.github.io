@@ -22,7 +22,23 @@
   </button>
   <p class="data" hidden id="role">
     I am a student in Web Mapping.
-  </p> 
+  </p>
+
+  <script>
+    // $("p") <-- this will reference all of the <p> tags
+    // $("#role") <-- this will reference all "#role" ids
+    // $(".data") <-- this will reference all ".data" classes
+
+    // use jQuery to listen for a button click
+    // toggle the hidden role message
+
+    $("button#role").click(
+            function() {
+              $("p#id").toggle();
+            }
+      );
+  </script>
+  
   <a href="lab02.html">This is a link to my previous lab file.</a>
   <p class="data">I go to Dartmouth College. I am originally from Bethesda, <sup>Maryland</sup>. I have a 10-pound dog named <strong>Moose</strong>. A couple of years ago, my mom posted a photograph of Moose online. After doing so, the <em>CEO</em> of Big League Chew saw the photo and reached out; he wanted Moose to be the Big League Chew "Dog of the Year." Moose had a photoshoot, and his photo, name, and story were printed on <em>hundreds</em> of packs of gum!</p>
 <table>
