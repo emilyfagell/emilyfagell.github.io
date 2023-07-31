@@ -13,6 +13,7 @@
          var word = "g r e m l i n"
          var blanks = "_ _ _ _ _ _ _";
          var guesses = "";
+         var url = 'youwin.jpeg';
 
          $("#word").html(blanks);
 
@@ -44,7 +45,10 @@
                    if (blanks == word) {
                      $("#error_msg").text("YOU WON!!!!");
                    if (blanks == word) {
-                       <div id="youwin"></div>
+                       $(document).ready(function() {
+                         var image = new Image ();
+                         image.src = url;
+                         $('#container').append(image);});
                      }
                    }
                  }
