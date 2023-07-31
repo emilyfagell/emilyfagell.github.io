@@ -33,6 +33,27 @@
             }
       );
   </script> 
+   <button id="info">
+    Click here to find out what other classes I am taking!
+  </button>
+  <p class="data" hidden id="info">
+    I am also taking Haunted Houses in American Literature and Intersections.
+  </p>
+
+  <script>
+    // $("p") <-- this will reference all of the <p> tags
+    // $("#info") <-- this will reference all "#role" ids
+    // $(".data") <-- this will reference all ".data" classes
+
+    // use jQuery to listen for a button click
+    // toggle the hidden info message
+
+    $("button#info").click(
+            function() {
+              $("p#info").fadeToggle();
+            }
+      );
+  </script> 
   <div id="Moose">
     <img id="Moose-img" src="Moose.jpg">
     <br>
