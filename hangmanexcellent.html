@@ -37,6 +37,14 @@
              } else { 
                    $("#numleft").html(total_guesses);
 
+                 if (total_guesses < 0) {
+                   $(document).ready(function() {
+                         var image = new Image ();
+                         image.src = "youlose.jpeg";
+                         $('#losecontainer').append(image);})
+             } else { 
+                   $("#numleft").html(total_guesses);
+
                    if (word.includes(id)) {
                      var index = word.indexOf(id);
                      console.log("letter " + id + " is at index " + index);
@@ -51,7 +59,7 @@
                        $(document).ready(function() {
                          var image = new Image ();
                          image.src = "youwin.jpeg";
-                         $('#container').append(image);});
+                         $('#wincontainer').append(image);});
                      }
                    }
                  }
@@ -108,6 +116,7 @@
     </p>    
   </div>
   <div id="error_msg" style="color: red;"></div>
-  <div id="container"></div>
+  <div id="wincontainer"></div>
+  <div id="losecontainer"></div>
 </body>
 </html>
