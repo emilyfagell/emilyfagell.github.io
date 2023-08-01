@@ -10,10 +10,13 @@
       function() {
 
          var total_guesses = 10;
-         var word = "g r e m l i n"
          var blanks = "_ _ _ _ _ _ _";
          var guesses = "";
          var url = 'youwin.jpeg';
+      const array_name = ["g r e m l i n", "j u k e b o x", "a b l e i s m", "b a c k l o t", "c a b i n e t", "f a c t o r y", "g a i n f u l", "i c e b o a t", "l a b o r e d", "p a d l o c k"];
+      // Returns a random integer from 0 to 9:
+        math.floor(Math.random() * 10);
+        var word = array[random]
 
          $("#word").html(blanks);
 
