@@ -38,10 +38,9 @@
                    $("#numleft").html(total_guesses);
 
                 if (total_guesses < 0) {
-                  $(document).ready(function() {
                     var image = new Image ();
                     image.src = "youlose.jpeg";
-                    $('#losecontainer').append(image);});
+                    $('#losecontainer').append(image););
 
                 } else {
                     $("#numleft").html(total_guesses);}
@@ -57,10 +56,9 @@
                      $("#error_msg").text("YOU WON!!!!");
 
                    if (blanks == word) {
-                       $(document).ready(function() {
                          var image = new Image ();
                          image.src = "youwin.jpeg";
-                         $('#wincontainer').append(image);});
+                         $('#wincontainer').append(image););
                      }
                    }
                  }
