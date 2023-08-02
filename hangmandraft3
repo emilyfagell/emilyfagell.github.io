@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hangman</title> <!-- the title of our web page -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script></script>
+  <script>
+    
+     $(document).ready(
+
+      function() {
+
+         var total_guesses = 10;
+         var blanks = "_ _ _ _ _ _ _";
+         var guesses = "";
+         var url = 'youwin.jpeg';
+      const array_words = ["g r e m l i n", "j u k e b o x", "c l o w n", "b a c k l o t", "c a b i n e t", "f a c t o r y", "g a i n f u l", "i c e b o a t", "l a b o r e d", "p a d l o c k"];
+      // Returns a random integer from 0 to 9:
+        var word = array_words[Math.floor(Math.random() * array_words.length)];
+        
+         $("#word").html(blanks);
+
+           $(".letter").click(
+
+             function() {
+               var id = $(this).attr('id');
+               console.log("clicked on " + id);
+
+              if (word.includes(id)) {
+              var image = new Image ();
+              image.src = "correct.jpeg";
+              $('#correctcontainer').append(image);
+
+              } else {
+              var image = new Image ();
+                image.src = "incorrect.jpeg";
+                $('#incorrectcontainter').append(image);
+
+               if (guesses.includes(id)) {
+                 $("#error_msg").html("You already guessed " + id);
+             } else {
+                 guesses = guesses + id;
+                 $("#" + id).css('text-decoration', 'line-through');
+
+                 total_guesses = total_guesses - 1;
+                 if (total_guesses < 0) {
+                   $("#error_msg").html("You are out of guesses. YOU LOSE!")
+
+                    
+                    var image = new Image ();
+                    image.src = "youlose.jpeg";
+                    $('#losecontainer').append(image);
+                   
+             } else { 
+                   $("#numleft").html(total_guesses);
+
+                   if (word.includes(id)) {
+                     var index = word.indexOf(id);
+                     console.log("letter " + id + " is at index " + index);
+                     blanks = blanks.substr(0, index) + id + 
+                              blanks.substr(index + 1);
+                     $("#word").html(blanks);
+                   }
+                   if (blanks == word) {
+                     $("#error_msg").text("YOU WON!!!!");
+
+                   if (blanks == word) {
+                         var image = new Image ();
+                         image.src = "youwin.jpeg";
+                         $('#wincontainer').append(image);
+                     }
+                   }
+                 }
+              }   
+           }
+           )
+
+         });
+  </script>
+</head>
+<body>
+  <h1>Hangman!</h1>
+
+  <div id="chances">
+    <p>
+      You have <span id="numleft">10</span> chances left.
+    </p>
+  </div>
+  <div id="wordspace">
+      <p>
+        The word to guess is <span id="word" style="font-weight: bold;"
+            ></span>
+      </p>
+  </div>
+  <div id="entry">
+    <p>Click on a letter to make a guess.</p>
+    <p>
+      <span class="letter" id="a">a</span>
+      <span class="letter" id="b">b</span>
+      <span class="letter" id="c">c</span>
+      <span class="letter" id="d">d</span>
+      <span class="letter" id="e">e</span>
+      <span class="letter" id="f">f</span>
+      <span class="letter" id="g">g</span>
+      <span class="letter" id="h">h</span>
+      <span class="letter" id="i">i</span>
+      <span class="letter" id="j">j</span>
+      <span class="letter" id="k">k</span>
+      <span class="letter" id="l">l</span>
+      <span class="letter" id="m">m</span>
+      <span class="letter" id="n">n</span>
+      <span class="letter" id="o">o</span>
+      <span class="letter" id="p">p</span>
+      <span class="letter" id="q">q</span>
+      <span class="letter" id="r">r</span>
+      <span class="letter" id="s">s</span>
+      <span class="letter" id="t">t</span>
+      <span class="letter" id="u">u</span>
+      <span class="letter" id="v">v</span>
+      <span class="letter" id="w">w</span>
+      <span class="letter" id="x">x</span>
+      <span class="letter" id="y">y</span>
+      <span class="letter" id="z">z</span>
+    </p>    
+  </div>
+  <div id="error_msg" style="color: red;"></div>
+  <div id="wincontainer"></div>
+  <div id="losecontainer"></div>
+  <div id="correctcontainer"></div>
+  <div id="incorrectcontainer"></div>
+</body>
+</html>
