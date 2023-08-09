@@ -41,9 +41,9 @@ $(document).ready(function(){
                   }).addTo(map);
 
         L.geoJson(railroads_geojson,
-                  { onEachFeature: function(feature, layer) {
-                    layer.bindPopup("<b>Name: " +
-                    feature.properties.NAME + "</b>");
+                   { onEachFeature: function(feature, layer) {
+                  layer.bindPopup("<b>Name: " + 
+                  feature.properties.NAME + "</b>");
                 }
                   }).addTo(map);
 })
