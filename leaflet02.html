@@ -33,7 +33,7 @@ $(document).ready(function(){
          })
 
         L.geoJson(CTLayer_geojson,
-                {onEachFeature: function(feature, layer) {
+                { onEachFeature: function(feature, layer) {
                   layer.bindPopup("<b>Name: " + 
                   feature.properties.NAME + "</b>");
                 }
