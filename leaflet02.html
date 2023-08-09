@@ -43,7 +43,7 @@ $(document).ready(function(){
         L.geoJson(railroads_geojson,
                   { onEachFeature: function(feature, layer) {
                     layer.bindPopup("<b>Name: " +
-                    feature.properties.NAME + </b>");
+                    feature.properties.NAME + "</b>");
                 }
                   }).addTo(map);
 })
