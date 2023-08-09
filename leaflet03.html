@@ -29,9 +29,9 @@ $(document).ready(function(){
 
   function lineSymbology(feature) {
     var status = feature.properties.STATUS;
-    var lineColor = "#FF0000 ";
+    var lineColor = "#FF000";
 
-    if (status == Active) { lineColor = "#0000FF"; }
+    if (status == Active) { lineColor = "#0000FF;" }
 
     return {
       color: lineColor,
