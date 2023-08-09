@@ -26,9 +26,13 @@ $(document).ready(function(){
                                            { maxZoom: 19,
                                                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href=http://hot.osm.org">HOT OSM</a>' 
       }) 
+
+  function lineSymbology(feature) {
+    var status = feature.properties.STATUS;
+    var lineColor = "blue";
+
+    if (status ≠ Active) lineColor = "red"; }
   
-      
-       
          var map = L.map('map', {
            center: [ 43.7034, -72.2887 ],
            zoom: 15,
