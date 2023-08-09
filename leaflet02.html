@@ -16,6 +16,7 @@
     </style>
 
     <script src="CTLayer.geojson"></script>
+    <script src="railroads.geojson"></script>
     
     <script>
 $(document).ready(function(){
@@ -38,7 +39,13 @@ $(document).ready(function(){
                   feature.properties.NAME + "</b>");
                 }
                   }).addTo(map);
-  
+
+        L.geoJson(railroads_geojson,
+                  { onEachFeature: function(feature, layer) {
+                    layer.bindPopup("<b>Name: " +
+                    feature.properties.NAME + </b>");
+                }
+                  }).addTo(map);
 })
     </script>
   </head>
