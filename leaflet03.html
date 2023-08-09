@@ -39,14 +39,15 @@ $(document).ready(function(){
                 { onEachFeature: function(feature, layer) {
                   layer.bindPopup("<b>Name: " + 
                   feature.properties.NAME + "</b><br>" +
-                  "TOWN: " + feature.properties.TOWN);
+                  "Town: " + feature.properties.TOWN);
                 }
                   }).addTo(map);
 
   railroadsLayer = L.geoJson(railroads_geojson,
                    { onEachFeature: function(feature, layer) {
                   layer.bindPopup("<b>Name: " + 
-                  feature.properties.NAME + "</b>");
+                  feature.properties.NAME + "</b><br>" +
+                  "Status: " + feature.properties.STATUS);
                 }
                   }).addTo(map);
 })
