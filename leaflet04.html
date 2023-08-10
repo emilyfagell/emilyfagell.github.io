@@ -55,7 +55,7 @@ $(document).ready(function(){
 
 var response = $.ajax({
     url: "railroads2.geojson",
-    dataType: "jSon",
+    dataType: "json",
     success: console.log("railroad data loaded!"),
     error: function(xhr) {
 	    alert(xhr.StatusText);
