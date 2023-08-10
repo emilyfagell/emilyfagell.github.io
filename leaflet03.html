@@ -29,9 +29,9 @@ $(document).ready(function(){
 
   function lineSymbology(feature) {
     var length = feature.properties.SECT_LENGTH;
-    var lineColor = "#FF000";
+    var lineColor = "#000000";
 
-    if (length > 1) { lineColor = "#0000FF"; } 
+    if (length > 1) { lineColor = "##FF000"; } 
     if (length > 10){ lineColor = "800080" ; }
 
     return {
