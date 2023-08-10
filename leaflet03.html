@@ -29,10 +29,10 @@ $(document).ready(function(){
 
   function lineSymbology(feature) {
     var length = feature.properties.SECT_LENGTH;
-    var lineColor = "#000000";
+    var lineColor = "#FF00FF";
 
     if (length > 1.0) { lineColor = "##FF000"; } 
-    if (length > 10.0){ lineColor = "800080" ; }
+    if (length > 10.0){ lineColor = "#800080" ; }
 
     return {
       color: lineColor,
