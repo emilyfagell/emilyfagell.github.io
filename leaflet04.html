@@ -71,7 +71,7 @@ $.when(response).done(function() {
                	   	feature.properties.NAME + "</b><br>" +
                	   	"Section Length: " + feature.properties.SECT_LENGTH);
                	 }
-                	  });
+                	  }).addTo(map);
 	 $("#toggleRailroads").show();
  	 $("#toggleRailroads").click( function() {
    	 if (railroadsVisible) {
