@@ -45,21 +45,7 @@ $(document).ready(function(){
       color: lineColor,
       opacity: 1
     };
-}
-var geojsonMarkerOptions = {
-    radius: 8,
-    fillColor: "#ff7800",
-    color: "#000",
-    weight: 1,
-    opacity: 1,
-    fillOpacity: 0.8
-};
-L.geoJson(TOWN, {
-    pointToLayer: function (feature, latlng) {
-        return L.circleMarker(latlng, geojsonMarkerOptions);
-    }
-}).addTo(map);})
-		  
+}	  
          var map = L.map('map', {
            center: [ 43.7034, -72.2887 ],
            zoom: 15
@@ -98,6 +84,7 @@ L.geoJson(TOWN, {
     railroadsLayer.addTo(map);
     }
   })
+})
     </script>
   </head>
   <body>
