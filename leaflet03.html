@@ -71,7 +71,7 @@ $(document).ready(function(){
                      onEachFeature: function(feature, layer) {
                   layer.bindPopup("<b>Name: " + 
                   feature.properties.NAME + "</b><br>" +
-                  "Length: " + feature.properties.SECT_LENGTH);
+                  "sectLength: " + feature.properties.SECT_LENGTH);
                 }
                   });
 
