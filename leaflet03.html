@@ -56,7 +56,7 @@ $(document).ready(function(){
 
 		       }
 
-	L.control.layers(baseMaps).addTo(maps);
+	L.control.layers(baseMaps).addTo(map);
 
       CTLayer = L.geoJson(CTLayer_geojson,
                 { onEachFeature: function(feature, layer) {
