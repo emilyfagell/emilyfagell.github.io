@@ -58,7 +58,15 @@ $(document).ready(function(){
 
 	L.control.layers(baseMaps).addTo(map);
 
-	var geojsonMarkerOptions = {
+      CTLayer = L.geoJson(CTLayer_geojson,
+                { onEachFeature: function(feature, layer) {
+                  layer.bindPopup("<b>Name: " + 
+                  feature.properties.NAME + "</b><br>" +
+                  "Town: " + feature.properties.TOWN);
+                }
+                  }).addTo(map);
+
+var geojsonMarkerOptions = {
     radius: 8,
     fillColor: "#ff7800",
     color: "#000",
@@ -71,14 +79,6 @@ L.geoJson(CTLayer, {
         return L.circleMarker(latlng, geojsonMarkerOptions);
     }
 }).addTo(map);}
-
-      CTLayer = L.geoJson(CTLayer_geojson,
-                { onEachFeature: function(feature, layer) {
-                  layer.bindPopup("<b>Name: " + 
-                  feature.properties.NAME + "</b><br>" +
-                  "Town: " + feature.properties.TOWN);
-                }
-                  }).addTo(map);
 
   railroadsLayer = L.geoJson(railroads_geojson,
                    { style: lineSymbology,
