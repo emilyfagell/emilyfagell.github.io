@@ -35,11 +35,11 @@ $(document).ready(function(){
 });
 
   function lineSymbology(feature) {
-    var Sect length = feature.properties.SECT_LENGTH;
+    var sectLength = feature.properties.SECT_LENGTH;
     var lineColor = "#FF00FF";
 
-    if (Sect length > 1.0) { lineColor = "#0000FF"; } 
-    if (Sect length > 10.0){ lineColor = "#800080"; }
+    if (sectLength > 1.0) { lineColor = "#0000FF"; } 
+    if (sectLength > 10.0){ lineColor = "#800080"; }
 
     return {
       color: lineColor,
