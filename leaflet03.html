@@ -9,7 +9,6 @@
      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
    crossorigin=""></script>
-    
     <style>
       #map { height: 400px; width: 700px; }
       html, body {height: 100%; margin: 0; padding: 0; }
@@ -28,7 +27,12 @@ $(document).ready(function(){
       var OpenStreetMap_HOT = L.tileLayer ('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
                                            { maxZoom: 19,
                                                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href=http://hot.osm.org">HOT OSM</a>' 
-      }) 
+      });
+
+      var USGS_USTopo = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', {
+	maxZoom: 20,
+	attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>'
+});
 
   function lineSymbology(feature) {
     var length = feature.properties.SECT_LENGTH;
