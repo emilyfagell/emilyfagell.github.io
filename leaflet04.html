@@ -17,7 +17,6 @@
     
     <script>
 $(document).ready(function(){
-      var CTLayer;
       var railroadsVisible = true;
   
       var OpenStreetMap_HOT = L.tileLayer ('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
@@ -53,14 +52,6 @@ $(document).ready(function(){
 		       }
 
 	L.control.layers(baseMaps).addTo(map);
-
-      CTLayer = L.geoJson(CTLayer_geojson,
-                { onEachFeature: function(feature, layer) {
-                  layer.bindPopup("<b>Name: " + 
-                  feature.properties.NAME + "</b><br>" +
-                  "Town: " + feature.properties.TOWN);
-                }
-                  }).addTo(map);
 
 var response = $.ajax({
     url: "railroads2.geojson",
