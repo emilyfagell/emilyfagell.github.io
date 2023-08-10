@@ -48,9 +48,15 @@ $(document).ready(function(){
 }
          var map = L.map('map', {
            center: [ 43.7034, -72.2887 ],
-           zoom: 15,
-           layers: [OpenStreetMap_HOT]
-         })
+           zoom: 15
+         });
+
+	var baseMaps = { "OSM" : OpenStreetMap_HOT,
+			"USGS" : USGS_USImagery
+
+		       }
+
+	L.control.layers(baseMaps).addTo(maps);
 
       CTLayer = L.geoJson(CTLayer_geojson,
                 { onEachFeature: function(feature, layer) {
