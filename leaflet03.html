@@ -28,10 +28,10 @@ $(document).ready(function(){
       }) 
 
   function lineSymbology(feature) {
-    var status = feature.properties.FEAT_LENGTH;
+    var length = feature.properties.SECT_LENGTH;
     var lineColor = "#FF000";
 
-    if (status > 1) { lineColor = "#0000FF"; }
+    if (length > 1) { lineColor = "#0000FF"; }
 
     return {
       color: lineColor,
@@ -57,7 +57,7 @@ $(document).ready(function(){
                      onEachFeature: function(feature, layer) {
                   layer.bindPopup("<b>Name: " + 
                   feature.properties.NAME + "</b><br>" +
-                  "Length: " + feature.properties.FEAT_LENGTH);
+                  "Length: " + feature.properties.SECT_LENGTH);
                 }
                   }).addTo(map);
 })
