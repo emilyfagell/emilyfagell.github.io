@@ -53,8 +53,7 @@ var response = $.ajax({
 $.when(response).done(function() {	
 	
  	var literacyLayer = L.geoJson(response.responseJSON,
-                   { style: lineSymbology,
-                     onEachFeature: function(feature, layer) {
+                   { onEachFeature: function(feature, layer) {
                 	  layer.bindPopup("<b>Estimated Literacy Rate: " + 
                	   	feature.properties.Indirect_Estimate + "</b><br>" +
                	   	"Estimated Literacy Rate: " + feature.properties.Indirect_Estimate);
