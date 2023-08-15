@@ -28,7 +28,26 @@ $(document).ready(function(){
 	maxZoom: 20,
 	attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>'
 });
-})	  
+})
+function getColor(d) {
+    return d > 250 ? 'e5f5f9' :
+           d > 260  ? '#99d8c9' :
+           d > 270  ? '#2ca25f';
+}
+
+function style(feature) {
+    return {
+        fillColor: getColor(feature.properties.Indirect_Estimate),
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7
+    };
+}
+
+L.geoJson(statesData, {style: style}).addTo(map);
+	    
          var map = L.map('map', {
            center: [ 43.7034, -72.2887 ],
            zoom: 15
