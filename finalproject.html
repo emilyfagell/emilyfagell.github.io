@@ -77,7 +77,8 @@ $.when(response).done(function() {
                 	  layer.bindPopup("<b>Estimated Literacy Rate: " + 
                	   	feature.properties.Indirect_Estimate + "</b><br>" +
                	   	"Estimated Literacy Rate: " + feature.properties.Indirect_Estimate);
-               	 }
+               	 },
+		    style: style(feature)
                 	  }).addTo(map);
 	 $("#toggleLiteracy").show();
  	 $("#toggleLiteracy").click( function() {
