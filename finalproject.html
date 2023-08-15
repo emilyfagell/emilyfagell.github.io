@@ -28,18 +28,6 @@ $(document).ready(function(){
 	maxZoom: 20,
 	attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>'
 });
-
-  function lineSymbology(feature) {
-    var sectLength = feature.properties.SECT_LENGTH;
-    var lineColor = "#FF00FF";
-
-    if (sectLength > 1.0) { lineColor = "#0000FF"; } 
-    if (sectLength > 10.0){ lineColor = "#800080"; }
-
-    return {
-      color: lineColor,
-      opacity: 1
-    };
 }	  
          var map = L.map('map', {
            center: [ 43.7034, -72.2887 ],
@@ -49,7 +37,7 @@ $(document).ready(function(){
 	var baseMaps = { "OSM" : OpenStreetMap_HOT,
 			"USGS" : USGS_USImagery
 
-		       }
+		       }		
 
 	L.control.layers(baseMaps).addTo(map);
 
@@ -65,8 +53,7 @@ var response = $.ajax({
 $.when(response).done(function() {	
 	
  	var literacyLayer = L.geoJson(response.responseJSON,
-                   { style: lineSymbology,
-                     onEachFeature: function(feature, layer) {
+                   { onEachFeature: function(feature, layer) {
                 	  layer.bindPopup("<b>Estimated Literacy Rate: " + 
                	   	feature.properties.Indirect_Estimate + "</b><br>" +
                	   	"Estimated Literacy Rate: " + feature.properties.Indirect_Estimate);
