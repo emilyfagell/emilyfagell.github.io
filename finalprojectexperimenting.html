@@ -13,14 +13,27 @@
 	p { text-align: justify;
        font-family: roboto, georgia;
       }
-      #map { height: 600px; width: 1000px; margin-left: auto; margin-right: auto;}
+      #mapLiteracy { height: 600px; width: 1000px; margin-left: auto; margin-right: auto;}
       html, body {height: 100%; margin-left: 100px; margin-right: 100px; margin-top: 25px; padding: 0; background: #BCD2E8}
       #buttons { padding: 10px; margin-left: auto; margin-right: auto; background: #ADD8E6; }
+      #mapTurnout { height: 600px; width: 1000px; margin-left: auto; margin-right: auto;}
+      html, body {height: 100%; margin-left: 100px; margin-right: 100px; margin-top: 25px; padding: 0; background: #BCD2E8}
 .legendLiteracy {
     line-height: 18px;
     color: #555;
 }
 .legendLiteracy i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+.legendTurnout {
+    line-height: 18px;
+    color: #555;
+}
+.legendTurnout i {
     width: 18px;
     height: 18px;
     float: left;
@@ -67,7 +80,12 @@ function style(feature) {
 
 
 	    
-         var map = L.map('map', {
+         var map = L.mapLiteracy('mapLiteracy', {
+           center: [ 39.8355, -99.0909 ],
+           zoom: 4
+         });
+
+	var map = L.mapTurnout('mapTurnout', {
            center: [ 39.8355, -99.0909 ],
            zoom: 4
          });
@@ -76,8 +94,11 @@ function style(feature) {
 			"OSM" : OpenStreetMap_HOT			
 
 		       }		
-	USGS_USTopo.addTo(map);
-	L.control.layers(baseMaps).addTo(map);
+	USGS_USTopo.addTo(mapLiteracy);
+	L.control.layers(baseMaps).addTo(mapLiteracy);
+
+	USGS_USTopo.addTo(mapTurnout);
+	L.control.layers(baseMaps).addTo(mapTurnout);
 
 var response = $.ajax({
     url: "literacy.geojson",
@@ -103,15 +124,15 @@ $.when(response).done(function() {
                	   	feature.properties.Indirect_Estimate + "</b>");
                	 },
 		    style: style
-                	  }).addTo(map);
+                	  }).addTo(mapLiteracy);
 	 $("#toggleLiteracy").show();
  	 $("#toggleLiteracy").click( function() {
    	 if (literacyVisible) {
     	  literacyVisible = false;
-     	 literacyLayer.removeFrom(map);
+     	 literacyLayer.removeFrom(mapLiteracy);
   	  } else {
    		 literacyVisible = true;
- 	   literacyLayer.addTo(map);
+ 	   literacyLayer.addTo(mapLiteracy);
    	  }
  	})
 
@@ -122,19 +143,19 @@ $.when(response).done(function() {
                   "Voter Turnout (Highest Office): " + feature.properties.VEP_Turnout_Rate__Highest_Offic);
                 },
 		    style: style
-                	  }).addTo(map);
+                	  }).addTo(mapTurnout);
 	 $("#toggleTurnout").show();
  	 $("#toggleTurnout").click( function() {
    	 if (turnoutVisible) {
     	  turnoutVisible = false;
-     	 turnoutLayer.removeFrom(map);
+     	 turnoutLayer.removeFrom(mapTurnout);
   	  } else {
    		 turnoutVisible = true;
- 	   turnoutLayer.addTo(map);
+ 	   turnoutLayer.addTo(mapTurnout);
    	  }
  	})
 
-var legend = L.control({position: 'bottomright'});
+var legendLiteracy = L.control({position: 'bottomright'});
 legend.onAdd = function (literacyLayer) {
     var div = L.DomUtil.create('div', 'info legend'),
         grades = [250, 255, 260, 265, 270, 275, 280],
@@ -150,7 +171,7 @@ legend.onAdd = function (literacyLayer) {
     return div;
 };
 
-legend.addTo(map);
+legend.addTo(mapLiteracy);
        })
 
 })
@@ -164,10 +185,11 @@ legend.addTo(map);
     <p style="font-family: roboto, georgia;"> Although the Voting Rights Act outlawed the tests in 1965 and 1970, literacy nonetheless continues to affect an individual's ability and likelihood to vote. According the the National Institutes of Health, educational attainment (of which literacy is a key factor) "is among the strongest correlates of voter turnout." Moreover, recent laws (implemented in 2020) limit the assistance voters can receive at the ballot box — thus hindering access for voters with disabilities or low literacy scores (PBS). </p>
     <p style="font-family: roboto, georgia;"> The maps below demonstrates average literacy scale scores (measured on a scale of 1-500) of U.S. States (2012/2014/2017) and voter turnout in the 2020 elections.  </p>
 <h3 style="font-family: roboto;">Figure 1: U.S. Average Literacy Scale Scores (2012/2014/2017) </h3>
-	  <div id="map"></div>
+	  <div id="mapLiteracy"></div>
     <div id="buttons">
       <button id="toggleLiteracy" hidden>Toggle the Literacy Layer.</button>
     </div>
 <p>Source: U.S. Department of Education, National Center for Education Statistics, U.S. Program for the International Assessment of Adult Competencies (PIAAC), 2012/2014/2017.</p>
+  <div id="mapTurnout"></div>
   </body>
 </html>
