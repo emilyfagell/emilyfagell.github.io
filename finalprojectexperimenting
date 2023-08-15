@@ -83,6 +83,16 @@ $.when(response).done(function() {
                	 },
 		    style: style
                 	  }).addTo(map);
+
+var turnoutLayer = L.geoJson(response.responseJSON,
+                   { onEachFeature: function(feature, layer) {
+                	  layer.bindPopup("<b>Voter Turnout Total Ballots: " + 
+               	   	feature.properties.VEP_Turnout_Rate__Total_Ballots + "</b><br>" + 
+		"Voter Turnout Highest Office: " + feature.properties.VEP_Turnout_Rate__Highest_Offic);
+               	 },
+		    style: style
+                	  }).addTo(map);
+
 	 $("#toggleLiteracy").show();
  	 $("#toggleLiteracy").click( function() {
    	 if (literacyVisible) {
