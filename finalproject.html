@@ -75,8 +75,7 @@ $.when(response).done(function() {
  	var literacyLayer = L.geoJson(response.responseJSON,
                    { onEachFeature: function(feature, layer) {
                 	  layer.bindPopup("<b>Estimated Literacy Rate: " + 
-               	   	feature.properties.Indirect_Estimate + "</b><br>" +
-               	   	"Estimated Literacy Rate: " + feature.properties.Indirect_Estimate);
+               	   	feature.properties.Indirect_Estimate + "</b>");
                	 },
 		    style: style(feature)
                 	  }).addTo(map);
