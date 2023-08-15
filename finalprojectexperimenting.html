@@ -80,7 +80,7 @@ function style(feature) {
 
 
 	    
-         var map = L.mapLiteracy('mapLiteracy', {
+         var map = L.map('mapLiteracy', {
            center: [ 39.8355, -99.0909 ],
            zoom: 4
          });
@@ -110,7 +110,7 @@ var response = $.ajax({
 var response = $.ajax({
     url: "turnout.geojson",
     dataType: "json",
-    success: console.log("literacy data loaded!"),
+    success: console.log("turnout data loaded!"),
     error: function(xhr) {
 	    alert(xhr.StatusText);
     }
