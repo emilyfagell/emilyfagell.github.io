@@ -1,7 +1,7 @@
 <! DOCTYPE html>
 <html>
   <head>
-    <title>U.S. Education: Literacy and Voter Turnout by State</title>
+    <title>Literacy and Voter Turnout by U.S. State</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
@@ -29,9 +29,21 @@ $(document).ready(function(){
 	attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>'
 });
 
+  function lineSymbology(feature) {
+    var sectLength = feature.properties.SECT_LENGTH;
+    var lineColor = "#FF00FF";
+
+    if (sectLength > 1.0) { lineColor = "#0000FF"; } 
+    if (sectLength > 10.0){ lineColor = "#800080"; }
+
+    return {
+      color: lineColor,
+      opacity: 1
+    };
+}	  
          var map = L.map('map', {
-           center: [ 37.0902, -95.7129 ],
-           zoom: 4
+           center: [ 43.7034, -72.2887 ],
+           zoom: 15
          });
 
 	var baseMaps = { "OSM" : OpenStreetMap_HOT,
@@ -53,7 +65,8 @@ var response = $.ajax({
 $.when(response).done(function() {	
 	
  	var literacyLayer = L.geoJson(response.responseJSON,
-                   { onEachFeature: function(feature, layer) {
+                   { style: lineSymbology,
+                     onEachFeature: function(feature, layer) {
                 	  layer.bindPopup("<b>Estimated Literacy Rate: " + 
                	   	feature.properties.Indirect_Estimate + "</b><br>" +
                	   	"Estimated Literacy Rate: " + feature.properties.Indirect_Estimate);
@@ -74,11 +87,10 @@ $.when(response).done(function() {
     </script>
   </head>
   <body>
-    <h1>U.S. Education: Literacy and Voter Turnout by State</h1>
+    <h1>Literacy and Voter Turnout by U.S. State</h1>
     <div id="map"></div>
     <div id="buttons">
       <button id="toggleLiteracy" hidden>Toggle the Literacy Layer.</button>
     </div>
   </body>
 </html>
-
