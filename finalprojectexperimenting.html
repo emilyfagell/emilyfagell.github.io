@@ -16,11 +16,11 @@
       #map { height: 600px; width: 1000px; margin-left: auto; margin-right: auto;}
       html, body {height: 100%; margin-left: 100px; margin-right: 100px; margin-top: 25px; padding: 0; background: #BCD2E8}
       #buttons { padding: 10px; margin-left: auto; margin-right: auto; background: #ADD8E6; }
-.legend {
+.legendLiteracy {
     line-height: 18px;
     color: #555;
 }
-.legend i {
+.legendLiteracy i {
     width: 18px;
     height: 18px;
     float: left;
@@ -32,7 +32,7 @@
     <script>
 $(document).ready(function(){
       var literacyVisible = true;
-  
+      var turnoutVisible = true;
       var OpenStreetMap_HOT = L.tileLayer ('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
                                            { maxZoom: 19,
                                                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href=http://hot.osm.org">HOT OSM</a>' 
@@ -43,7 +43,7 @@ $(document).ready(function(){
 	attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>'
 });
 // sourced from https://leafletjs.com/examples/choropleth/
-function getColor(d) {
+function getColorLiteracy(d) {
     return d < 250 ? '#edf8fb' :
            d < 255  ? '#ccece6' :
            d < 260  ? '#99d8c9' :
@@ -56,7 +56,7 @@ function getColor(d) {
 
 function style(feature) {
     return {
-        fillColor: getColor(feature.properties.Indirect_Estimate),
+        fillColor: getColorLiteracy(feature.properties.Indirect_Estimate),
         weight: 2,
         opacity: 1,
         color: 'white',
@@ -86,6 +86,13 @@ var response = $.ajax({
     error: function(xhr) {
 	    alert(xhr.StatusText);
     }
+var response = $.ajax({
+    url: "turnout.geojson",
+    dataType: "json",
+    success: console.log("literacy data loaded!"),
+    error: function(xhr) {
+	    alert(xhr.StatusText);
+    }
 });
 
 $.when(response).done(function() {	
@@ -105,6 +112,25 @@ $.when(response).done(function() {
   	  } else {
    		 literacyVisible = true;
  	   literacyLayer.addTo(map);
+   	  }
+ 	})
+
+	 var turnoutLayer = L.geoJson(response.responseJSON,
+                   { onEachFeature: function(feature, layer) {
+                	  layer.bindPopup("<b>Voter Turnout (Total Ballots): " + 
+               	   	feature.properties.VEP_Turnout_Rate__Total_Ballots + "</b><br>" +
+                  "Voter Turnout (Highest Office): " + feature.properties.VEP_Turnout_Rate__Highest_Offic);
+                },
+		    style: style
+                	  }).addTo(map);
+	 $("#toggleTurnout").show();
+ 	 $("#toggleTurnout").click( function() {
+   	 if (turnoutVisible) {
+    	  turnoutVisible = false;
+     	 turnoutLayer.removeFrom(map);
+  	  } else {
+   		 turnoutVisible = true;
+ 	   turnoutLayer.addTo(map);
    	  }
  	})
 
