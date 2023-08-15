@@ -30,9 +30,9 @@ $(document).ready(function(){
 });
 })
 function getColor(d) {
-    return d > 250 ? 'e5f5f9' :
-           d > 260  ? '#99d8c9' :
-           d > 270  ? '#2ca25f' :
+    return d < 250 ? '#e5f5f9' :
+           d < 260  ? '#99d8c9' :
+           d < 270  ? '#2ca25f' :
 	    "#000000";
 	    }
 
@@ -47,7 +47,7 @@ function style(feature) {
     };
 }
 
-L.geoJson(statesData, {style: style}).addTo(map);
+//L.geoJson(statesData, {style: style}).addTo(map);
 	    
          var map = L.map('map', {
            center: [ 43.7034, -72.2887 ],
@@ -90,7 +90,7 @@ $.when(response).done(function() {
    	  }
  	})
        })
-     ;
+     
     </script>
   </head>
   <body>
