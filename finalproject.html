@@ -76,7 +76,7 @@ function style(feature) {
 			"USGS" : USGS_USTopo
 
 		       }		
-
+	USGS_USTopo.addTo(map);
 	L.control.layers(baseMaps).addTo(map);
 
 var response = $.ajax({
