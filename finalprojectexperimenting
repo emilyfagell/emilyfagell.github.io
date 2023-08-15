@@ -74,6 +74,15 @@ var response = $.ajax({
     }
 });
 
+var response = $.ajax({
+    url: "turnout.geojson",
+    dataType: "json",
+    success: console.log("turnout data loaded!"),
+    error: function(xhr) {
+	    alert(xhr.StatusText);
+    }
+});
+
 $.when(response).done(function() {	
 	
  	var literacyLayer = L.geoJson(response.responseJSON,
@@ -84,7 +93,7 @@ $.when(response).done(function() {
 		    style: style
                 	  }).addTo(map);
 
-var turnoutLayer = L.geoJson(response.responseJSON,
+	var turnoutLayer = L.geoJson(response.responseJSON,
                    { onEachFeature: function(feature, layer) {
                 	  layer.bindPopup("<b>Voter Turnout Total Ballots: " + 
                	   	feature.properties.VEP_Turnout_Rate__Total_Ballots + "</b><br>" + 
