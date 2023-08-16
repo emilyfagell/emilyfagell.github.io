@@ -163,6 +163,7 @@ $.when(response).done(function() {
                 },
 		    style: style
                 	  }).addTo(mapTurnout);
+	turnoutLayer.addTo(mapTurnout);
 	 $("#toggleTurnout").show();
  	 $("#toggleTurnout").click( function() {
    	 if (turnoutVisible) {
@@ -170,6 +171,7 @@ $.when(response).done(function() {
      	 turnoutLayer.removeFrom(mapTurnout);
   	  } else {
    		 turnoutVisible = true;
+		turnoutLayer.addTo(mapTurnout);
    	  }
  	})
 
