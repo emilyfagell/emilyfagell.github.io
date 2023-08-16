@@ -66,10 +66,28 @@ function getColorLiteracy(d) {
 	   d < 280  ? '#005824' :
 	    "#000000";
 	    }
+function getColorTurnout(d) {
+    return d < 55 ? '#edf8fb' :
+           d < 60  ? '#ccece6' :
+           d < 65  ? '#99d8c9' :
+	   d < 70  ? '#66c2a4' :
+	   d < 75  ? '#41ae76' :
+	   d < 80  ? '#238b45' :
+	    "#000000";
+}
 
 function style(feature) {
     return {
         fillColor: getColorLiteracy(feature.properties.Indirect_Estimate),
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7
+    }
+function style(feature) {
+    return {
+        fillColor: getColorTurnout(feature.properties.Indirect_Estimate),
         weight: 2,
         opacity: 1,
         color: 'white',
