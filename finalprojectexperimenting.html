@@ -106,7 +106,8 @@ function styleTurnout(feature) {
 
 	var mapTurnout = L.map('mapTurnout', {
            center: [ 39.8355, -99.0909 ],
-           zoom: 4
+           zoom: 4,
+	
          });
 
 	var baseMaps = { "USGS" : USGS_USTopo,
@@ -114,7 +115,7 @@ function styleTurnout(feature) {
 
 		       }		
 	USGS_USTopo.addTo(mapLiteracy);
-	L.control.layers(baseMaps).addTo(mapLiteracy);
+	L.control.layers(baseMaps).addTo(mapLiteracy),
 
 	USGS_USTopo.addTo(mapTurnout);
 	L.control.layers(baseMaps).addTo(mapTurnout);
