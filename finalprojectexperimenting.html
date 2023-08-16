@@ -185,7 +185,8 @@ legendLiteracy.onAdd = function (literacyLayer) {
         div.innerHTML +=
             '<i style="background:' + getColorLiteracy(grades[i] + 1) + '"></i> ' +
             grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-     return div;}
+     }
+	return div;
 };
 	var legendTurnout = L.control({position: 'bottomright'});
 legendTurnout.onAdd = function (turnoutLayer) {
@@ -198,7 +199,8 @@ legendTurnout.onAdd = function (turnoutLayer) {
         div.innerHTML +=
             '<i style="background:' + getColorTurnout(grades[i] + 1) + '"></i> ' +
             grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-    return div;}
+    }
+	return div;
 };
 
 legendLiteracy.addTo(mapLiteracy);
