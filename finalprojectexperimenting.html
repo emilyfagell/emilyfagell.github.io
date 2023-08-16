@@ -156,7 +156,7 @@ $.when(response).done(function() {
  	})
 
 var legendLiteracy = L.control({position: 'bottomright'});
-legend.onAdd = function (literacyLayer) {
+legendLiteracy.onAdd = function (literacyLayer) {
     var div = L.DomUtil.create('div', 'info legend'),
         grades = [250, 255, 260, 265, 270, 275, 280],
         labels = [];
@@ -164,18 +164,29 @@ legend.onAdd = function (literacyLayer) {
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
         div.innerHTML +=
-            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+            '<i style="background:' + getColorLiteracy(grades[i] + 1) + '"></i> ' +
             grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
     }
+var legendTurnout = L.control({position: 'bottomright'});
+legendTurnout.onAdd = function (turnoutLayer) {
+    var div = L.DomUtil.create('div', 'info legend'),
+        grades = [250, 255, 260, 265, 270, 275, 280],
+        labels = [];
 
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + getColorTurnout(grades[i] + 1) + '"></i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
     return div;
 };
 
-legend.addTo(mapLiteracy);
+legendLiteracy.addTo(mapLiteracy);
+legendTurnout.addTo(mapTurnout);
+
        })
 
-})
-     
+})    
     </script>
   </head>
   <body>
