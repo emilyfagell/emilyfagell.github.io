@@ -85,15 +85,13 @@ function style(feature) {
         dashArray: '3',
         fillOpacity: 0.7
     }
-function style(feature) {
-    return {
         fillColor: getColorTurnout(feature.properties.Indirect_Estimate),
         weight: 2,
         opacity: 1,
         color: 'white',
         dashArray: '3',
-        fillOpacity: 0.7
-    };
+        fillOpacity: 0.7 
+};
 }
 
 
@@ -184,8 +182,9 @@ legendLiteracy.onAdd = function (literacyLayer) {
         div.innerHTML +=
             '<i style="background:' + getColorLiteracy(grades[i] + 1) + '"></i> ' +
             grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-    }
-var legendTurnout = L.control({position: 'bottomright'});
+     return div;}
+};
+	var legendTurnout = L.control({position: 'bottomright'});
 legendTurnout.onAdd = function (turnoutLayer) {
     var div = L.DomUtil.create('div', 'info legend'),
         grades = [250, 255, 260, 265, 270, 275, 280],
@@ -196,7 +195,7 @@ legendTurnout.onAdd = function (turnoutLayer) {
         div.innerHTML +=
             '<i style="background:' + getColorTurnout(grades[i] + 1) + '"></i> ' +
             grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-    return div;
+    return div;}
 };
 
 legendLiteracy.addTo(mapLiteracy);
