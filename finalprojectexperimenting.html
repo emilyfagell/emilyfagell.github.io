@@ -159,7 +159,7 @@ $.when(response).done(function() {
                 	  layer.bindPopup("<b>Estimated Literacy Rate: " + 
                	   	feature.properties.Indirect_Estimate + "</b>");
                	 },
-		    style: style
+		    style: styleLiteracy
                 	  }).addTo(mapLiteracy);
 	 $("#toggleLiteracy").show();
  	 $("#toggleLiteracy").click( function() {
@@ -178,7 +178,7 @@ $.when(response).done(function() {
                	   	feature.properties.VEP_Turnout_Rate__Total_Ballots + "</b><br>" +
                   "Voter Turnout (Highest Office): " + feature.properties.VEP_Turnout_Rate__Highest_Offic);
                 },
-		    style: style
+		    style: styleTurnout
                 	  }).addTo(mapTurnout);
 	turnoutLayer.addTo(mapTurnout);
 	 $("#toggleTurnout").show();
