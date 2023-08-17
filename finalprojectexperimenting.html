@@ -194,7 +194,7 @@ $.when(response).done(function() {
 
 var legendLiteracy = L.control({position: 'bottomright'});
 legendLiteracy.onAdd = function (literacyLayer) {
-    var div = L.DomUtil.create('div', 'info legend'),
+    var divLiteracy = L.DomUtil.create('div', 'info legend'),
         grades = [250, 255, 260, 265, 270, 275, 280],
         labels = [];
 
@@ -208,8 +208,8 @@ legendLiteracy.onAdd = function (literacyLayer) {
 };
 	var legendTurnout = L.control({position: 'bottomright'});
 legendTurnout.onAdd = function (turnoutLayer) {
-    var div = L.DomUtil.create('div', 'info legend'),
-        grades = [250, 255, 260, 265, 270, 275, 280],
+    var divTurnout = L.DomUtil.create('div', 'info legend'),
+        grades = [55, 60, 65, 70, 75, 80],
         labels = [];
 
     // loop through our density intervals and generate a label with a colored square for each interval
