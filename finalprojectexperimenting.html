@@ -46,15 +46,26 @@
 $(document).ready(function(){
       var literacyVisible = true;
       var turnoutVisible = true;
-      var OpenStreetMap_HOT = L.tileLayer ('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+      var OpenStreetMap_HOTLiteracy = L.tileLayer ('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
                                            { maxZoom: 19,
                                                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href=http://hot.osm.org">HOT OSM</a>' 
       });
 
-      var USGS_USTopo = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', {
+      var OpenStreetMap_HOTTurnout = L.tileLayer ('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+                                           { maxZoom: 19,
+                                               attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href=http://hot.osm.org">HOT OSM</a>' 
+      });
+
+      var USGS_USTopoLiteracy = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', {
 	maxZoom: 20,
 	attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>'
 });
+
+	var USGS_USTopoTurnout = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', {
+	maxZoom: 20,
+	attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>'
+});
+	
 // sourced from https://leafletjs.com/examples/choropleth/
 function getColorLiteracy(d) {
     return d < 250 ? '#edf8fb' :
@@ -110,15 +121,20 @@ function styleTurnout(feature) {
 	
          });
 
-	var baseMaps = { "USGS" : USGS_USTopo,
-			"OSM" : OpenStreetMap_HOT			
+	var baseMapsLiteracy = { "USGS" : USGS_USTopoLiteracy,
+			"OSM" : OpenStreetMap_HOTLiteracy			
 
 		       }		
-	USGS_USTopo.addTo(mapLiteracy);
-	L.control.layers(baseMaps).addTo(mapLiteracy),
+	USGS_USTopoLiteracy.addTo(mapLiteracy);
+	L.control.layers(baseMapsLiteracy).addTo(mapLiteracy);
 
-	USGS_USTopo.addTo(mapTurnout);
-	L.control.layers(baseMaps).addTo(mapTurnout);
+	var baseMapsTurnout = { "USGS" : USGS_USTopoTurnout,
+			"OSM" : OpenStreetMap_HOTTurnout			
+
+		       }
+
+	USGS_USTopoTurnout.addTo(mapTurnout);
+	L.control.layers(baseMapsTurnout).addTo(mapTurnout);
 
 var response = $.ajax({
     url: "literacy.geojson",
