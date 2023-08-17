@@ -15,7 +15,8 @@
       }
       #mapLiteracy { height: 600px; width: 1000px; margin-left: auto; margin-right: auto;}
       html, body {height: 100%; margin-left: 100px; margin-right: 100px; margin-top: 25px; padding: 0; background: #BCD2E8}
-      #buttons { padding: 10px; margin-left: auto; margin-right: auto; background: #ADD8E6; }
+      #buttonsLiteracy { padding: 10px; margin-left: auto; margin-right: auto; }
+	#buttonsTurnout { padding: 10px; margin-left: auto; margin-right: auto; }
       #mapTurnout { height: 600px; width: 1000px; margin-left: auto; margin-right: auto;}
       html, body {height: 100%; margin-left: 100px; margin-right: 100px; margin-top: 25px; padding: 0; background: #BCD2E8}
 .legendLiteracy {
@@ -244,13 +245,15 @@ legendTurnout.addTo(mapTurnout);
     <p style="font-family: roboto, georgia;"> The maps below demonstrates average literacy scale scores (measured on a scale of 1-500) of U.S. States (2012/2014/2017) and voter turnout in the 2020 elections.  </p>
 <h3 style="font-family: roboto;">Figure 1: U.S. Average Literacy Scale Scores (2012/2014/2017) </h3>
 	  <div id="mapLiteracy"></div>
-    <div id="buttons">
+    <div id="buttonsLiteracy">
       <button id="toggleLiteracy" hidden>Toggle the Literacy Layer.</button>
     </div>
 <p>Source: U.S. Department of Education, National Center for Education Statistics, U.S. Program for the International Assessment of Adult Competencies (PIAAC), 2012/2014/2017.</p>
-  <div id="mapTurnout"></div>
+<h3>Figure 2: Voter Turnout Rates, 2020 Election</h3>  
+<div id="mapTurnout"></div>
 <div id="buttonsTurnout">
-	<button id="toggleTurnout" hidden>Toggle the Literacy Layer.</button>
+	<button id="toggleTurnout" hidden>Toggle the Turnouy Layer.</button>
 </div>
+<p>Source: United States Elections Project</p>
   </body>
 </html>
