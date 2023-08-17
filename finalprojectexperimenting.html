@@ -202,7 +202,7 @@ $.when(response2).done(function() {
 
 var legendLiteracy = L.control({position: 'bottomright'});
 legendLiteracy.onAdd = function (literacyLayer) {
-    var divLiteracy = L.DomUtil.create('div2', 'info legend'),
+    var divLiteracy = L.DomUtil.create('div', 'info legendLiteracy'),
         grades = [250, 255, 260, 265, 270, 275, 280],
         labels = [];
 
@@ -216,7 +216,7 @@ legendLiteracy.onAdd = function (literacyLayer) {
 };
 	var legendTurnout = L.control({position: 'bottomright'});
 legendTurnout.onAdd = function (turnoutLayer) {
-    var divTurnout = L.DomUtil.create('div1', 'info legend'),
+    var divTurnout = L.DomUtil.create('div', 'info legendTurnout'),
         grades = [55, 60, 65, 70, 75, 80],
         labels = [];
 
