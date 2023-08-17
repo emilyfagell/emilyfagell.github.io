@@ -15,8 +15,8 @@
       }
       #mapLiteracy { height: 600px; width: 1000px; margin-left: auto; margin-right: auto;}
       html, body {height: 100%; margin-left: 100px; margin-right: 100px; margin-top: 25px; margin-bottom: 50px; padding: 0; background: #BCD2E8}
-      #buttonsLiteracy { padding: 10px; margin-left: auto; margin-right: auto; }
-      #buttonsTurnout { padding: 10px; margin-left: auto; margin-right: auto; }
+      #buttonsLiteracy { padding: 10px; margin-left: auto; margin-right: auto; } 
+	#buttonsTurnout { padding: 10px; margin-left: auto; margin-right: auto; }
       #mapTurnout { height: 600px; width: 1000px; margin-left: auto; margin-right: auto;}
       html, body {height: 100%; margin-left: 100px; margin-right: 100px; margin-top: 25px; padding: 0; background: #BCD2E8}
 .legendLiteracy {
@@ -213,8 +213,6 @@ legendLiteracy.onAdd = function (literacyLayer) {
      }
 	return divLiteracy;
 };
-legendLiteracy.addTo(mapLiteracy);
-};
 	var legendTurnout = L.control({position: 'bottomright'});
 legendTurnout.onAdd = function (turnoutLayer) {
     var divTurnout = L.DomUtil.create('div', 'info legendTurnout'),
@@ -230,7 +228,10 @@ legendTurnout.onAdd = function (turnoutLayer) {
 	return divTurnout;
 };
 
+legendLiteracy.addTo(mapLiteracy);
 legendTurnout.addTo(mapTurnout);
+
+       })
 
 })    
     </script>
