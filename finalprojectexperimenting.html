@@ -199,7 +199,7 @@ $.when(response2).done(function() {
    	  }
  	})
 
-var legendLiteracy = L.control({position: 'bottomright'});
+var legendLiteracy = L.control({positionLiteracy: 'bottomright'});
 legendLiteracy.onAdd = function (literacyLayer) {
     var divLiteracy = L.DomUtil.create('div', 'info legendLiteracy'),
         grades = [250, 255, 260, 265, 270, 275, 280],
@@ -214,7 +214,7 @@ legendLiteracy.onAdd = function (literacyLayer) {
 	return divLiteracy;
 legendLiteracy.addTo(mapLiteracy);
 	
-	var legendTurnout = L.control({position: 'bottomright'});
+	var legendTurnout = L.control({positionTurnout: 'bottomright'});
 legendTurnout.onAdd = function (turnoutLayer) {
     var divTurnout = L.DomUtil.create('div', 'info legendTurnout'),
         grades = [55, 60, 65, 70, 75, 80],
