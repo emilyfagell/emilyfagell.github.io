@@ -256,9 +256,12 @@ $.when(response2).done(function() {
    	 if (literacyVisible) {
     	  literacyVisible = false;
      	 literacyLayer.removeFrom(mapBoth);
+	$("#legendLiteracy").hide();
   	  } else {
    		 literacyVisible = true;
  	   literacyLayer.addTo(mapBoth);
+	$("#legendLiteracy").show();
+	$(#legendTurnout").hide();
    	  }
  	});
 
@@ -268,9 +271,12 @@ $.when(response2).done(function() {
    	 if (turnoutVisible) {
     	  turnoutVisible = false;
      	 turnoutLayer.removeFrom(mapBoth);
+	$("#legendTurnout").hide();
   	  } else {
    		 turnoutVisible = true;
 		turnoutLayer.addTo(mapBoth);
+	$("#legendTurnout").show();
+	$("#legendLiteracy").hide();	 
    	  }
  	});
 
@@ -309,7 +315,7 @@ legendTurnout.addTo(mapTurnout);
 
        }
 
-})    
+});    
     </script>
   </head>
   <body>
