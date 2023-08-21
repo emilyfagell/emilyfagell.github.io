@@ -130,7 +130,7 @@ var response1 = $.ajax({
     overlayMaps["Literacy"] = literacyLayer;
     layerControl.addOverlay(literacyLayer, "Literacy");
     error: function(xhr) {
-	    alert(xhr.StatusText);
+	    alert(xhr.statusText);
     } 
 });
 var response2 = $.ajax({
@@ -149,7 +149,7 @@ var response2 = $.ajax({
     overlayMaps["Turnout"] = turnoutLayer;
     layerControl.addOverlay(turnoutLayer, "Turnout");
     error: function(xhr) {
-	    alert(xhr.StatusText);
+	    alert(xhr.statusText);
     }
 });
 // Layer Controls sourced from https://leafletjs.com/examples/layers-control/ and ChatGPT for help with debugging/reorganization
