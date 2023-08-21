@@ -101,17 +101,17 @@ function styleTurnout(feature) {
 
 
 	    
-         var mapLiteracy = L.map('map', {
+         var map = L.map('map', {
            center: [ 39.8355, -99.0909 ],
            zoom: 4
          });
 
-	var baseMapsLiteracy = { "USGS" : USGS_USTopo,
+	var baseMaps = { "USGS" : USGS_USTopo,
 			"OSM" : OpenStreetMap_HOT			
 
 		       }		
-	USGS_USTopoLiteracy.addTo(map);
-	L.control.layers(baseMapsLiteracy).addTo(map);
+	USGS_USTopo.addTo(map);
+	L.control.layers(baseMaps).addTo(map);
 
 var response1 = $.ajax({
     url: "literacy.geojson",
