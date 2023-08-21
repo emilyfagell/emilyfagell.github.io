@@ -173,7 +173,7 @@ var response2 = $.ajax({
 });
 
 var response3 = $.ajax({
-    url: "literacy.geojson", "turnout.geojson"
+    url: ["literacy.geojson", "turnout.geojson"],
     dataType: "json",
     success: console.log("literacy and turnout data loaded!"),
     error: function(xhr) {
