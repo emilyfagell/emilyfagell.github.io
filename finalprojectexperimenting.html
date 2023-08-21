@@ -183,6 +183,14 @@ var response2 = $.ajax({
 	    alert(xhr.StatusText);
     }
 });
+var response3 = $.ajax({
+    url: ["turnout.geojson", "literacy.geojson"];
+    dataType: "json",
+    success: console.log("both data loaded!"),
+    error: function(xhr) {
+	    alert(xhr.StatusText);
+    }
+});
 
 $.when(response1).done(function() {	
 	
@@ -226,9 +234,11 @@ $.when(response2).done(function() {
    		 turnoutVisible = true;
 		turnoutLayer.addTo(mapTurnout);
    	  }
- 	});
+ 	})
 
-	var literacyLayer = L.geoJson(response2.responseJSON,
+$.when(response3).done(function() {
+
+	var literacyLayer = L.geoJson(response3.responseJSON,
                    { onEachFeature: function(feature, layer) {
                 	  layer.bindPopup("<b>Estimated Literacy Rate: " + 
                	   	feature.properties.Indirect_Estimate + "</b>");
