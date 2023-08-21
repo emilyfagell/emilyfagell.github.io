@@ -41,7 +41,6 @@
     </style>
     
     <script>
-var legendLiteracy, legendTurnout; //when debugging, ChatGPT said I need to declare the legends outside the document.ready function
 $(document).ready(function(){
       var literacyVisible = true;
       var turnoutVisible = true;
@@ -130,9 +129,6 @@ var response1 = $.ajax({
                 	  }).addTo(map);
     overlayMaps["Literacy"] = literacyLayer;
     layerControl.addOverlay(literacyLayer, "Literacy");
-    
-    updateLegend(legendLiteracy, getColorLiteracy); //credit to ChatGPT for help figuring out legend updates
-    },
     error: function(xhr) {
 	    alert(xhr.StatusText);
     } 
@@ -152,16 +148,12 @@ var response2 = $.ajax({
                 	  }).addTo(map);
     overlayMaps["Turnout"] = turnoutLayer;
     layerControl.addOverlay(turnoutLayer, "Turnout");
-
-    updateLegend(legendTurnout, getColorTurnout); //credit to ChatGPT for help figuring out legend updates
-    },
     error: function(xhr) {
 	    alert(xhr.StatusText);
     }
 });
 // Layer Controls sourced from https://leafletjs.com/examples/layers-control/ and ChatGPT for help with debugging/reorganization
-
-function updateLegend(legend, getColor) {
+	
 var legendLiteracy = L.control({position: 'bottomright'});
 legendLiteracy.onAdd = function (literacyLayer) {
     var divLiteracy = L.DomUtil.create('div', 'info legendLiteracy'),
@@ -190,7 +182,6 @@ legendTurnout.onAdd = function (turnoutLayer) {
             grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
     }
 	return divTurnout;
-}
 };
 
 legendLiteracy.addTo(map);
