@@ -112,14 +112,6 @@ function styleTurnout(feature) {
 		       }		
 	USGS_USTopo.addTo(map);
 	L.control.layers(baseMaps).addTo(map);
-	
-	var overlayMaps = { "Literacy" : literacyVisible,
-		     "Turnout" : turnoutVisible
-			  };
-	
-var layerControl = L.control(baseMaps, overlayMaps).addTo(map);
-
-// sourced from https://leafletjs.com/examples/layers-control/
 
 var response1 = $.ajax({
     url: "literacy.geojson",
