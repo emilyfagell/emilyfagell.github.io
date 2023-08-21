@@ -155,10 +155,10 @@ $.when(response2).done(function() {
  	})
 
 var overlayMaps = { "Literacy" : literacyLayer,
-			   "Turnout" : turnoutLayer
+		     "Turnout" : turnoutLayer
 			  };
 
-	var layerControl = L.control(overlayMaps).addTo(map);
+var layerControl = L.control(overlayMaps).addTo(map);
 
 // sourced from https://leafletjs.com/examples/layers-control/
 var legendLiteracy = L.control({position: 'bottomright'});
