@@ -137,12 +137,24 @@ var response1 = $.ajax({
 var response2 = $.ajax({
     url: "turnout.geojson",
     dataType: "json",
-    success: console.log("turnout data loaded!"),
+    success: function(data) {
+    console.log("turnout data loaded!");
+    turnoutLayer = L.geoJson(response2.responseJSON,
+                   { onEachFeature: function(feature, layer) {
+                	  layer.bindPopup("<b>Voter Turnout (Total Ballots): " + 
+               	   	feature.properties.VEP_Turnout_Rate__Total_Ballots + "</b><br>" +
+                  "Voter Turnout (Highest Office): " + feature.properties.VEP_Turnout_Rate__Highest_Offic);
+                },
+		    style: styleTurnout
+                	  }).addTo(map);
+    overlayMaps["Turnout"] = turnoutLayer;
+    layerControl.addOverlay(turnoutLayer, "Turnout");
+    },
     error: function(xhr) {
 	    alert(xhr.StatusText);
     }
 });
-
+// Layer Controls sourced from https://leafletjs.com/examples/layers-control/ and ChatGPT for help with debugging
 $.when(response1).done(function() {	
 	
  	var literacyLayer = L.geoJson(response1.responseJSON,
