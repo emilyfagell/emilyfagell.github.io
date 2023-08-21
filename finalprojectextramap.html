@@ -251,8 +251,8 @@ $.when(response2).done(function() {
 	  if (turnoutVisible) {
 		  turnoutLayer.addTo(mapBoth);
 			    
-	 $("#toggleLiteracy").show();
- 	 $("#toggleLiteracy").click( function() {
+	 $("#toggleLiteracy2").show();
+ 	 $("#toggleLiteracy2").click( function() {
    	 if (literacyVisible) {
     	  literacyVisible = false;
      	 literacyLayer.removeFrom(mapBoth);
@@ -263,8 +263,8 @@ $.when(response2).done(function() {
  	});
 
 	turnoutLayer.addTo(mapBoth);
-	 $("#toggleTurnout").show();
- 	 $("#toggleTurnout").click( function() {
+	 $("#toggleTurnout2").show();
+ 	 $("#toggleTurnout2").click( function() {
    	 if (turnoutVisible) {
     	  turnoutVisible = false;
      	 turnoutLayer.removeFrom(mapBoth);
@@ -336,8 +336,8 @@ legendTurnout.addTo(mapTurnout);
 <a href="https://www.electproject.org/2020g"><p>Source: “2020 November General Election Turnout Rates.” US Elections Project, www.electproject.org/2020g. Accessed 17 Aug. 2023.</p></a>
 <div id="mapBoth"></div>
 <div id="buttonsBoth">
-	<button id="toggleLiteracy" hidden>Toggle the Literacy Layer.</button>
-	<button id="toggleTurnout" hidden>Toggle the Turnout Layer.</button>
+	<button id="toggleLiteracy2" hidden>Toggle the Literacy Layer.</button>
+	<button id="toggleTurnout2" hidden>Toggle the Turnout Layer.</button>
 </div>
 <h3>References</h3>
 <p>“2020 November General Election Turnout Rates.” US Elections Project, www.electproject.org/2020g. Accessed 17 Aug. 2023.</p>
