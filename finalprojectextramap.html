@@ -314,7 +314,13 @@ legendLiteracy.addTo(mapLiteracy);
 legendTurnout.addTo(mapTurnout);
 
        }
-
+var legendControl = L.control({position: 'bottomright'});
+	  legendControl.onAdd = function (map) {
+		  var div = L.DomUtil.create('div', 'info legend')
+		  div.innerHTML = '<p>Legend content for mapBoth</p>';
+		  return divBoth;
+	  };
+	  legendControl.addTo(mapBoth);
 });    
     </script>
   </head>
