@@ -232,10 +232,27 @@ $.when(response2).done(function() {
                 	  layer.bindPopup("<b>Estimated Literacy Rate: " + 
                	   	feature.properties.Indirect_Estimate + "</b>");
                	 },
-		    style: styleBoth
-                	  }).addTo(mapBoth);
-	 $("#toggleLiteracy2").show();
- 	 $("#toggleLiteracy2").click( function() {
+		    style: styleLiteracy,
+		   });
+	 var turnoutLayer = L.geoJson(response3.responseJSON,
+                   { onEachFeature: function(feature, layer) {
+                	  layer.bindPopup("<b>Voter Turnout (Total Ballots): " + 
+               	   	feature.properties.VEP_Turnout_Rate__Total_Ballots + "</b><br>" +
+                  "Voter Turnout (Highest Office): " + feature.properties.VEP_Turnout_Rate__Highest_Offic);
+                },
+		    style: styleTurnout,
+		   });
+
+	  if (literacyVisible) {
+		  literacyLayer.addTo(mapBoth);
+
+	  }
+
+	  if (turnoutVisible) {
+		  turnoutLayer.addTo(mapBoth);
+			    
+	 $("#toggleLiteracy").show();
+ 	 $("#toggleLiteracy").click( function() {
    	 if (literacyVisible) {
     	  literacyVisible = false;
      	 literacyLayer.removeFrom(mapBoth);
@@ -243,20 +260,11 @@ $.when(response2).done(function() {
    		 literacyVisible = true;
  	   literacyLayer.addTo(mapBoth);
    	  }
- 	})
+ 	});
 
-})
-    var turnoutLayer = L.geoJson(response3.responseJSON,
-                   { onEachFeature: function(feature, layer) {
-                	  layer.bindPopup("<b>Voter Turnout (Total Ballots): " + 
-               	   	feature.properties.VEP_Turnout_Rate__Total_Ballots + "</b><br>" +
-                  "Voter Turnout (Highest Office): " + feature.properties.VEP_Turnout_Rate__Highest_Offic);
-                },
-		    style: styleBoth
-                	  }).addTo(mapBoth);
 	turnoutLayer.addTo(mapBoth);
-	 $("#toggleTurnout2").show();
- 	 $("#toggleTurnout2").click( function() {
+	 $("#toggleTurnout").show();
+ 	 $("#toggleTurnout").click( function() {
    	 if (turnoutVisible) {
     	  turnoutVisible = false;
      	 turnoutLayer.removeFrom(mapBoth);
@@ -264,7 +272,7 @@ $.when(response2).done(function() {
    		 turnoutVisible = true;
 		turnoutLayer.addTo(mapBoth);
    	  }
- 	})
+ 	});
 
 var legendLiteracy = L.control({position: 'bottomright'});
 legendLiteracy.onAdd = function (literacyLayer) {
@@ -327,11 +335,9 @@ legendTurnout.addTo(mapTurnout);
 </div>
 <a href="https://www.electproject.org/2020g"><p>Source: “2020 November General Election Turnout Rates.” US Elections Project, www.electproject.org/2020g. Accessed 17 Aug. 2023.</p></a>
 <div id="mapBoth"></div>
-<div id="buttonsLiteracy2">
-	<button id="toggleLiteracy2" hidden>Toggle the Literacy Layer.</button>
-</div>
-<div id="buttonsTurnout2">
-	<button id="toggleTurnout2" hidden>Toggle the Turnout Layer.</button>
+<div id="buttonsBoth">
+	<button id="toggleLiteracy" hidden>Toggle the Literacy Layer.</button>
+	<button id="toggleTurnout" hidden>Toggle the Turnout Layer.</button>
 </div>
 <h3>References</h3>
 <p>“2020 November General Election Turnout Rates.” US Elections Project, www.electproject.org/2020g. Accessed 17 Aug. 2023.</p>
