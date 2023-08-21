@@ -1,0 +1,273 @@
+<! DOCTYPE html>
+<html>
+  <head>
+    <title>Literacy and Voter Turnout by U.S. State</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+   integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+   crossorigin=""/>
+     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+   integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+   crossorigin=""></script>
+    <style>
+	p { text-align: justify;
+       font-family: roboto, georgia;
+      }
+      #mapLiteracy { height: 600px; width: 1000px; margin-left: auto; margin-right: auto;}
+      html, body {height: 100%; margin-left: 100px; margin-right: 100px; margin-top: 25px; margin-bottom: 50px; padding: 0; background: #BCD2E8}
+      #buttonsLiteracy { padding: 10px; margin-left: auto; margin-right: auto; } 
+	#buttonsTurnout { padding: 10px; margin-left: auto; margin-right: auto; }
+      #mapTurnout { height: 600px; width: 1000px; margin-left: auto; margin-right: auto;}
+      html, body {height: 100%; margin-left: 100px; margin-right: 100px; margin-top: 25px; padding: 0; background: #BCD2E8}
+.legendLiteracy {
+    line-height: 18px;
+    color: #555;
+}
+.legendLiteracy i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+.legendTurnout {
+    line-height: 18px;
+    color: #555;
+}
+.legendTurnout i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+    </style>
+    
+    <script>
+$(document).ready(function(){
+      var literacyVisible = true;
+      var turnoutVisible = true;
+      var OpenStreetMap_HOTLiteracy = L.tileLayer ('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+                                           { maxZoom: 19,
+                                               attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href=http://hot.osm.org">HOT OSM</a>' 
+      });
+
+      var OpenStreetMap_HOTTurnout = L.tileLayer ('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+                                           { maxZoom: 19,
+                                               attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href=http://hot.osm.org">HOT OSM</a>' 
+      });
+
+      var USGS_USTopoLiteracy = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', {
+	maxZoom: 20,
+	attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>'
+});
+
+	var USGS_USTopoTurnout = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', {
+	maxZoom: 20,
+	attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>'
+});
+	
+// sourced from https://leafletjs.com/examples/choropleth/
+function getColorLiteracy(d) {
+    return d < 250 ? '#edf8fb' :
+           d < 255  ? '#ccece6' :
+           d < 260  ? '#99d8c9' :
+	   d < 265  ? '#66c2a4' :
+	   d < 270  ? '#41ae76' :
+	   d < 275  ? '#238b45' :
+	   d < 280  ? '#005824' :
+	    "#000000";
+	    }
+function getColorTurnout(d) {
+	d = d.replace(/%/, "");
+	d = parseFloat(d);
+    return d < 55 ? '#f2f0f7' :
+           d < 60  ? '#dadaeb' :
+           d < 65  ? '#bcbddc' :
+	   d < 70  ? '#9e9ac8' :
+	   d < 75  ? '#756bb1' :
+	   d < 80  ? '#54278f' :
+	    "#000000";
+}
+
+function styleLiteracy(feature) {
+    return {
+        fillColor: getColorLiteracy(feature.properties.Indirect_Estimate),
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7
+    };
+    }
+function styleTurnout(feature) {
+    return {
+        fillColor: getColorTurnout(feature.properties.VEP_Turnout_Rate__Total_Ballots),
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7 
+};
+}
+
+
+	    
+         var mapLiteracy = L.map('mapLiteracy', {
+           center: [ 39.8355, -99.0909 ],
+           zoom: 4
+         });
+
+	var mapTurnout = L.map('mapTurnout', {
+           center: [ 39.8355, -99.0909 ],
+           zoom: 4,
+	
+         });
+
+	var baseMapsLiteracy = { "USGS" : USGS_USTopoLiteracy,
+			"OSM" : OpenStreetMap_HOTLiteracy			
+
+		       }		
+	USGS_USTopoLiteracy.addTo(mapLiteracy);
+	L.control.layers(baseMapsLiteracy).addTo(mapLiteracy);
+
+	var baseMapsTurnout = { "USGS" : USGS_USTopoTurnout,
+			"OSM" : OpenStreetMap_HOTTurnout			
+
+		       }
+
+	USGS_USTopoTurnout.addTo(mapTurnout);
+	L.control.layers(baseMapsTurnout).addTo(mapTurnout);
+
+var response1 = $.ajax({
+    url: "literacy.geojson",
+    dataType: "json",
+    success: console.log("literacy data loaded!"),
+    error: function(xhr) {
+	    alert(xhr.StatusText);
+    } });
+var response2 = $.ajax({
+    url: "turnout.geojson",
+    dataType: "json",
+    success: console.log("turnout data loaded!"),
+    error: function(xhr) {
+	    alert(xhr.StatusText);
+    }
+});
+
+$.when(response1).done(function() {	
+	
+ 	var literacyLayer = L.geoJson(response1.responseJSON,
+                   { onEachFeature: function(feature, layer) {
+                	  layer.bindPopup("<b>Estimated Literacy Rate: " + 
+               	   	feature.properties.Indirect_Estimate + "</b>");
+               	 },
+		    style: styleLiteracy
+                	  }).addTo(mapLiteracy);
+	 $("#toggleLiteracy").show();
+ 	 $("#toggleLiteracy").click( function() {
+   	 if (literacyVisible) {
+    	  literacyVisible = false;
+     	 literacyLayer.removeFrom(mapLiteracy);
+  	  } else {
+   		 literacyVisible = true;
+ 	   literacyLayer.addTo(mapLiteracy);
+   	  }
+ 	})
+
+})
+
+$.when(response2).done(function() {
+
+	 var turnoutLayer = L.geoJson(response2.responseJSON,
+                   { onEachFeature: function(feature, layer) {
+                	  layer.bindPopup("<b>Voter Turnout (Total Ballots): " + 
+               	   	feature.properties.VEP_Turnout_Rate__Total_Ballots + "</b><br>" +
+                  "Voter Turnout (Highest Office): " + feature.properties.VEP_Turnout_Rate__Highest_Offic);
+                },
+		    style: styleTurnout
+                	  }).addTo(mapTurnout);
+	turnoutLayer.addTo(mapTurnout);
+	 $("#toggleTurnout").show();
+ 	 $("#toggleTurnout").click( function() {
+   	 if (turnoutVisible) {
+    	  turnoutVisible = false;
+     	 turnoutLayer.removeFrom(mapTurnout);
+  	  } else {
+   		 turnoutVisible = true;
+		turnoutLayer.addTo(mapTurnout);
+   	  }
+ 	})
+
+var legendLiteracy = L.control({position: 'bottomright'});
+legendLiteracy.onAdd = function (literacyLayer) {
+    var divLiteracy = L.DomUtil.create('div', 'info legendLiteracy'),
+        grades = [250, 255, 260, 265, 270, 275, 280],
+        labels = [];
+
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < grades.length; i++) {
+        divLiteracy.innerHTML +=
+            '<i style="background:' + getColorLiteracy(grades[i] + 1) + '"></i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+     }
+	return divLiteracy;
+	    };
+	
+	var legendTurnout = L.control({position: 'bottomright'});
+legendTurnout.onAdd = function (turnoutLayer) {
+    var divTurnout = L.DomUtil.create('div', 'info legendTurnout'),
+        grades = [55, 60, 65, 70, 75, 80],
+        labels = [];
+
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < grades.length; i++) {
+        divTurnout.innerHTML +=
+            '<i style="background:' + getColorTurnout(grades[i] + 1) + '"></i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+    }
+	return divTurnout;
+};
+
+legendLiteracy.addTo(mapLiteracy);
+legendTurnout.addTo(mapTurnout);
+
+       })
+
+})    
+    </script>
+  </head>
+  <body>
+<h1 style="font-family: roboto, georgia; margin-top: 50px;">Literacy and Voter Turnout by U.S. State</h1>
+  <h3 style="font-family: roboto, georgia;">Background: Literacy as a Political Tool</h3>
+    <p style="font-family: roboto, georgia;"> Throughout history, literacy and the vote have been closely intertwined. Until 1965 in the South (and 1970 in the rest of the nation), the U.S. government required individuals to pass a literacy test to vote. Theoretically implemented to ensure "an educated and informed electorate," the tests in practice blocked many Black people, poor people, and immigrants from the ballot box (National Museum of American History). </p>
+    <p style="font-family: roboto, georgia;"> Although the Voting Rights Act outlawed the tests in 1965 and 1970, literacy nonetheless continues to affect an individual's ability and likelihood to vote. For example, recent laws (implemented in 2020) limit the assistance voters can receive at the ballot box — thus hindering access for voters with disabilities or low literacy scores (PBS). Moreover, the National Institutes of Health reports that educational attainment (of which literacy is a key factor) remains "among the strongest correlates of voter turnout." </p>
+    <p style="font-family: roboto, georgia;"> The first map below demonstrates average literacy scale scores (measured on a scale of 1-500) in the United States, with aggregated data from 2012/2014/2017 (the most recent government data set readily available online). The second map, in an effort to demonstrate correlation between the two, demonstrates voter turnout in the 2020 general election. Literacy data stems from the U.S. Program for the International Assessment of Adult Competencies (PIAAC), a " large-scale international study of key cognitive and workplace skills of adults" (National Center for Education Statistics). In 2012-2015, the average U.S. adult scored higher than the international average score (272 vs. 267), NCES reported. For 2012/2014/2017 aggregated data, however, the estimated national average dropped to 264. Put differently, 22% of U.S. adults scored at or below Level 1 for literacy. For more information on score and level meanings, please see Figure 2 or visit: <a href="https://nces.ed.gov/surveys/piaac/skillsmap/"><p style="strong;">The National Center for Education Statistics</p></a></p>
+<h3 style="font-family: roboto;">Figure 1: U.S. Average Literacy Scale Scores (2012/2014/2017) </h3>
+	  <div id="mapLiteracy"></div>
+    <div id="buttonsLiteracy">
+      <button id="toggleLiteracy" hidden>Toggle the Literacy Layer.</button>
+    </div>
+<a href="https://nces.ed.gov/surveys/piaac/skillsmap/src/PDF/STATE.pdf"><p>Source: U.S. Department of Education, National Center for Education Statistics, U.S. Program for the International Assessment of Adult Competencies (PIAAC), 2012/2014/2017.</p></a>
+<h3>Figure 2: Description of PIAAC literacy discrete proficiency levels </h3>
+<div>
+<img src="literacy.jpg" style="width: 70%; height: auto; margin-left: 150px; margin-right: 150px;">
+</div>
+<h3>Figure 3: Voter Turnout Rates, 2020 Election</h3>  
+<div id="mapTurnout"></div>
+<div id="buttonsTurnout">
+	<button id="toggleTurnout" hidden>Toggle the Turnout Layer.</button>
+</div>
+<a href="https://www.electproject.org/2020g"><p>Source: “2020 November General Election Turnout Rates.” US Elections Project, www.electproject.org/2020g. Accessed 17 Aug. 2023.</p></a>
+<h3>References</h3>
+<p>“2020 November General Election Turnout Rates.” US Elections Project, www.electproject.org/2020g. Accessed 17 Aug. 2023.</p>
+<p>ArcGIS US Census States Layer.</p>
+<p>Barrón-López, Laura, and Ian Couzens. “Low Literacy Voters Struggle to Cast Ballots in the Face of Restrictive Voting Laws.” PBS, Public Broadcasting Service, 10 Oct. 2022, www.pbs.org/newshour/show/low-literacy-voters-struggle-to-cast-ballots-in-the-face-of-restrictive-voting-laws. </p>
+<p>“Comparison Charts of State and County Estimates Program for the International Assessment of Adult Competencies (PIAAC).” National Center for Education Statistics (NCES) (U.S. Department of Education), Institute of Education Sciences, nces.ed.gov/surveys/piaac/skillsmap/src/PDF/STATE.pdf. Accessed 17 Aug. 2023. </p>
+<p>“Interactive Choropleth Map - Leaflet - a JavaScript Library for Interactive Maps.” Leaflet, leafletjs.com/examples/choropleth/. Accessed 17 Aug. 2023. 
+<p>“Literacy Tests.” National Museum of American History, 3 May 2018, americanhistory.si.edu/democracy-exhibition/vote-voice/keeping-vote/state-rules-federal-rules/literacy-tests. </p>
+<p>“The NCES Fast Facts Tool Provides Quick Answers to Many Education Questions (National Center for Education Statistics).” National Center for Education Statistics (NCES) Home Page, a Part of the U.S. Department of Education, nces.ed.gov/fastfacts/display.asp?id=69. Accessed 17 Aug. 2023. </p>
+<p>“What Does the Cognitive Assessment of PIAAC Measure?” PIAAC, nces.ed.gov/surveys/piaac/measure.asp?section=1&amp;sub_section=3. Accessed 17 Aug. 2023. </p>  
+<p style="margin-bottom: 25px;">Yasserius. “Yasserius/Mapshaper_geojson_simplify: How to Reduce GEOJSON Shapefile Size Using Mapshaper.Org, with Some Tweaks for Plotly Choropleths and D3.Js.” GitHub, github.com/yasserius/mapshaper_geojson_simplify. Accessed 17 Aug. 2023. </p>
+  </body>
+</html>
