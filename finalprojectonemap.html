@@ -154,31 +154,7 @@ var response2 = $.ajax({
 	    alert(xhr.StatusText);
     }
 });
-// Layer Controls sourced from https://leafletjs.com/examples/layers-control/ and ChatGPT for help with debugging
-$.when(response1).done(function() {	
-	
- 	var literacyLayer = L.geoJson(response1.responseJSON,
-                   { onEachFeature: function(feature, layer) {
-                	  layer.bindPopup("<b>Estimated Literacy Rate: " + 
-               	   	feature.properties.Indirect_Estimate + "</b>");
-               	 },
-		    style: styleLiteracy
-                	  }).addTo(map);
-
-})
-
-$.when(response2).done(function() {
-
-	 var turnoutLayer = L.geoJson(response2.responseJSON,
-                   { onEachFeature: function(feature, layer) {
-                	  layer.bindPopup("<b>Voter Turnout (Total Ballots): " + 
-               	   	feature.properties.VEP_Turnout_Rate__Total_Ballots + "</b><br>" +
-                  "Voter Turnout (Highest Office): " + feature.properties.VEP_Turnout_Rate__Highest_Offic);
-                },
-		    style: styleTurnout
-                	  }).addTo(map);
-	
- 	})
+// Layer Controls sourced from https://leafletjs.com/examples/layers-control/ and ChatGPT for help with debugging/reorganization
 
 var legendLiteracy = L.control({position: 'bottomright'});
 legendLiteracy.onAdd = function (literacyLayer) {
