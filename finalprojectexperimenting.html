@@ -226,7 +226,31 @@ $.when(response2).done(function() {
    		 turnoutVisible = true;
 		turnoutLayer.addTo(mapTurnout);
    	  }
- 	})
+ 	});
+
+	var literacyLayer = L.geoJson(response2.responseJSON,
+                   { onEachFeature: function(feature, layer) {
+                	  layer.bindPopup("<b>Estimated Literacy Rate: " + 
+               	   	feature.properties.Indirect_Estimate + "</b>");
+               	 },
+		    style: styleLiteracy,
+		   });
+	 var turnoutLayer = L.geoJson(response3.responseJSON,
+                   { onEachFeature: function(feature, layer) {
+                	  layer.bindPopup("<b>Voter Turnout (Total Ballots): " + 
+               	   	feature.properties.VEP_Turnout_Rate__Total_Ballots + "</b><br>" +
+                  "Voter Turnout (Highest Office): " + feature.properties.VEP_Turnout_Rate__Highest_Offic);
+                },
+		    style: styleTurnout,
+		   });
+
+	  if (literacyVisible) {
+		  literacyLayer.addTo(mapBoth);
+
+	  }
+
+	  if (turnoutVisible) {
+		  turnoutLayer.addTo(mapBoth);
 
 var legendLiteracy = L.control({position: 'bottomright'});
 legendLiteracy.onAdd = function (literacyLayer) {
