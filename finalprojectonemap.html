@@ -180,7 +180,7 @@ legendLiteracy.onAdd = function (literacyLayer) {
 	return divLiteracy;
 	    };
 	
-	var legendTurnout = L.control({position: 'bottomright'});
+	var legendTurnout = L.control({position: 'bottomleft'});
 legendTurnout.onAdd = function (turnoutLayer) {
     var divTurnout = L.DomUtil.create('div', 'info legendTurnout'),
         grades = [55, 60, 65, 70, 75, 80],
