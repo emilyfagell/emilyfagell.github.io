@@ -109,11 +109,14 @@ function styleTurnout(feature) {
 	var baseMaps = { "USGS" : USGS_USTopo,
 			"OSM" : OpenStreetMap_HOT			
 
-		       };		
+		       }
+	USGS_USTopo.addTo(map);
+	L.control.layers(baseMaps).addTo(map);
+	
 	var overlayMaps = { "Literacy" : literacyVisible,
 		     "Turnout" : turnoutVisible
 			  };
-USGS_USTopo.addTo(map);
+	
 var layerControl = L.control(baseMaps, overlayMaps).addTo(map);
 
 // sourced from https://leafletjs.com/examples/layers-control/
