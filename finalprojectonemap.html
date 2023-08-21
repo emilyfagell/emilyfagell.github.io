@@ -109,9 +109,14 @@ function styleTurnout(feature) {
 	var baseMaps = { "USGS" : USGS_USTopo,
 			"OSM" : OpenStreetMap_HOT			
 
-		       }		
+		       };
+
+	var overlayMaps = { "Literacy" : literacyLayer,
+			   "Turnout" : turnoutLayer
+
+		        };
 	USGS_USTopo.addTo(map);
-	L.control.layers(baseMaps).addTo(map);
+	var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
 
 var response1 = $.ajax({
     url: "literacy.geojson",
