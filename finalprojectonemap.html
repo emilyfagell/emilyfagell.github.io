@@ -111,20 +111,29 @@ function styleTurnout(feature) {
 
 		       };
 
-	var overlayMaps = { "Literacy" : literacyLayer,
-			   "Turnout" : turnoutLayer
-
-		        };
+	var overlayMaps = { };
 	USGS_USTopo.addTo(map);
 	var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
 
 var response1 = $.ajax({
     url: "literacy.geojson",
     dataType: "json",
-    success: console.log("literacy data loaded!"),
+    success: function(data) {
+    console.log("literacy data loaded!");
+    literacyLayer = L.geoJson(response1.responseJSON,
+                   { onEachFeature: function(feature, layer) {
+                	  layer.bindPopup("<b>Estimated Literacy Rate: " + 
+               	   	feature.properties.Indirect_Estimate + "</b>");
+               	 },
+		    style: styleLiteracy
+                	  }).addTo(map);
+    overlayMaps["Literacy"] = literacyLayer;
+    layerControl.addOverlay(literacyLayer, "Literacy");
+    },
     error: function(xhr) {
 	    alert(xhr.StatusText);
-    } });
+    } 
+});
 var response2 = $.ajax({
     url: "turnout.geojson",
     dataType: "json",
