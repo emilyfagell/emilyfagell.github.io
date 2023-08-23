@@ -67,7 +67,7 @@ function getColorLiteracy(d) {
 	    "#000000";
 	    }
 function getColorTurnout(d) {
-	d = d.replace(/%/, "");
+	d = d.replace("%", "");
 	d = parseFloat(d);
     return d < 55 ? '#f2f0f7' :
            d < 60  ? '#dadaeb' :
