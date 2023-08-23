@@ -183,7 +183,7 @@ legendTurnout.onAdd = function (turnoutLayer) {
             grades[i] + (grades[i] ? '&ndash;' + grades[i] + '<br>' : '+'))    
 	    divTurnout.innerHTML +=
             '<i style="background:' + getColorTurnout(grades[i]) + '"></i> ' +
-            grades[i] + (grades[i] ? '&ndash;' + grades[i] + '<br>' : '+');
+            grades[i] + (grades[i] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
     }
 	return divTurnout;
 };
