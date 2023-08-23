@@ -174,7 +174,7 @@ legendLiteracy.onAdd = function (literacyLayer) {
 	var legendTurnout = L.control({position: 'bottomleft'});
 legendTurnout.onAdd = function (turnoutLayer) {
     var divTurnout = L.DomUtil.create('div', 'info legendTurnout'),
-        grades = [55, 60, 65, 70, 75, 80],
+        grades = ["55%", "60%", "65%", "70%", "75%", "80%"],
         labels = [];
 
     // loop through our density intervals and generate a label with a colored square for each interval
