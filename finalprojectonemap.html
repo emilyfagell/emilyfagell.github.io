@@ -69,12 +69,12 @@ function getColorLiteracy(d) {
 function getColorTurnout(d) {
 	d = d.replace(/%/, "");
 	d = parseFloat(d);
-    return d < 55 ? '#f2f0f7' :
-           d < 60  ? '#dadaeb' :
-           d < 65  ? '#bcbddc' :
-	   d < 70  ? '#9e9ac8' :
-	   d < 75  ? '#756bb1' :
-	   d < 80  ? '#54278f' :
+    return d <= 55 ? '#f2f0f7' :
+           d <= 60  ? '#dadaeb' :
+           d <= 65  ? '#bcbddc' :
+	   d <= 70  ? '#9e9ac8' :
+	   d <= 75  ? '#756bb1' :
+	   d <= 80  ? '#54278f' :
 	    "#000000";
 }
 
@@ -179,11 +179,11 @@ legendTurnout.onAdd = function (turnoutLayer) {
 
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
-    console.log('<i style="background:' + getColorTurnout(grades[i] + 1) + '"></i> ' +
-            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+'))    
+    console.log('<i style="background:' + getColorTurnout(grades[i]) + '"></i> ' +
+            grades[i] + (grades[i] ? '&ndash;' + grades[i] + '<br>' : '+'))    
 	    divTurnout.innerHTML +=
-            '<i style="background:' + getColorTurnout(grades[i] + 1) + '"></i> ' +
-            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+            '<i style="background:' + getColorTurnout(grades[i]) + '"></i> ' +
+            grades[i] + (grades[i] ? '&ndash;' + grades[i] + '<br>' : '+');
     }
 	return divTurnout;
 };
