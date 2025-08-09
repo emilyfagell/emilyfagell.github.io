@@ -1,0 +1,15 @@
+# Clone the repository from GitHub
+git clone <your-git-repo-uri>
+cd your-repo
+
+# Create a new repository under your personal GitHub account using the web GUI
+
+# Set the new remote repository URL
+git remote rename origin old-origin
+git remote add origin https://github.com/emily-fagell/personal.git
+
+# Push all branches to the new remote
+git push --set-upstream origin --all
+
+# Push all tags to the new remote
+git push --set-upstream origin --tags
